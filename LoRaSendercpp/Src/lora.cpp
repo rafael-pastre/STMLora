@@ -693,19 +693,32 @@ void LoRaClass::handleDio0Rise()
   }
 }
 
-//singleTransfer()
+//NEW
 uint8_t LoRaClass::readRegister(uint8_t address)
 {
-  return singleTransfer(address & 0x7f, 0x00);
-}
-
-//singleTransfer()
-void LoRaClass::writeRegister(uint8_t address, uint8_t value)
-{
-  singleTransfer(address | 0x80, value);
+  //return singleTransfer(address & 0x7f, 0x00);
+	uint8_t value = 0;
+	address = address & 0x7f;
+	HAL_GPIO_WritePin(_nss_gpio_port, _nss_pin, GPIO_PIN_RESET);
+	HAL_SPI_Transmit (_hspi, &address, 1, 100);
+	HAL_SPI_Receive (_hspi, &value, 1, 100);
+	HAL_GPIO_WritePin(_nss_gpio_port, _nss_pin, GPIO_PIN_SET);
+	return value;
 }
 
 //NEW
+void LoRaClass::writeRegister(uint8_t address, uint8_t value)
+{
+  //singleTransfer(address | 0x80, value);
+	uint8_t MOSIBuffer[2];
+	MOSIBuffer[0] = address | 0x80;
+	MOSIBuffer[1] = value;
+	HAL_GPIO_WritePin(_nss_gpio_port, _nss_pin, GPIO_PIN_RESET);
+	HAL_SPI_Transmit (_hspi, MOSIBuffer, 2, 100);
+	HAL_GPIO_WritePin(_nss_gpio_port, _nss_pin, GPIO_PIN_SET);
+}
+
+//DEPRECATED
 uint8_t LoRaClass::singleTransfer(uint8_t address, uint8_t value)
 {
   uint8_t response;
@@ -717,10 +730,24 @@ uint8_t LoRaClass::singleTransfer(uint8_t address, uint8_t value)
   //response = _spi->transfer(value);
   //_spi->endTransaction();
 
-  HAL_SPI_Transmit (_hspi, &address, sizeof(uint8_t), 1000);
-  HAL_SPI_Transmit (_hspi, &value, sizeof(uint8_t), 1000);
-  HAL_SPI_Receive(_hspi, &response, sizeof(uint8_t), 1000);
-
+  if(HAL_SPI_Transmit (_hspi, &address, sizeof(uint8_t), 100) != HAL_OK){
+	  printf("Error\n");
+	  while(1);
+  }
+  if(HAL_SPI_TransmitReceive (_hspi, &value, &response, 2*sizeof(uint8_t), 100) != HAL_OK){
+  	  printf("Error\n");
+  	  while(1);
+    }
+  /*
+  if(HAL_SPI_Transmit (_hspi, &value, sizeof(uint8_t), 100) != HAL_OK){
+	  printf("Error\n");
+	  while(1);
+  }
+  if(HAL_SPI_Receive(_hspi, &response, sizeof(uint8_t), 100) != HAL_OK){
+	  printf("Error\n");
+	  while(1);
+  }
+*/
   HAL_GPIO_WritePin(_nss_gpio_port, _nss_pin, GPIO_PIN_SET);	//digitalWrite(_ss, HIGH);
 
   return response;

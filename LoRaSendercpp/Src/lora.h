@@ -109,11 +109,11 @@ public:
   size_t print(long, int = DEC);
   size_t print(unsigned long, int = DEC);
   size_t print(double, int = 2);
-private:
+//private:
   size_t printNumber(unsigned long, uint8_t);
   size_t printFloat(double, uint8_t);
 
-private:
+//private:
   void explicitHeaderMode();
   void implicitHeaderMode();
 
@@ -129,7 +129,7 @@ private:
   void writeRegister(uint8_t address, uint8_t value);
   uint8_t singleTransfer(uint8_t address, uint8_t value);
 
-private:
+//private:
   //SPISettings _spiSettings;
   //SPIClass* _spi;
   SPI_HandleTypeDef* _hspi;

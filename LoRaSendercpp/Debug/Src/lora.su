@@ -45,19 +45,19 @@ lora.cpp:643:6:void LoRaClass::dumpRegisters()	24	static
 lora.cpp:654:6:void LoRaClass::explicitHeaderMode()	16	static
 lora.cpp:662:6:void LoRaClass::implicitHeaderMode()	16	static
 lora.cpp:670:6:void LoRaClass::handleDio0Rise()	24	static
-lora.cpp:697:9:uint8_t LoRaClass::readRegister(uint8_t)	16	static
-lora.cpp:703:6:void LoRaClass::writeRegister(uint8_t, uint8_t)	16	static
-lora.cpp:709:9:uint8_t LoRaClass::singleTransfer(uint8_t, uint8_t)	24	static
-lora.cpp:730:6:void LoRaClass::onDio0Rise()	16	static
-lora.cpp:738:8:size_t LoRaClass::print(const char*)	16	static
-lora.cpp:743:8:size_t LoRaClass::print(char)	16	static
-lora.cpp:748:8:size_t LoRaClass::print(unsigned char, int)	24	static
-lora.cpp:753:8:size_t LoRaClass::print(int, int)	24	static
-lora.cpp:758:8:size_t LoRaClass::print(unsigned int, int)	24	static
-lora.cpp:763:8:size_t LoRaClass::print(long int, int)	32	static
-lora.cpp:779:8:size_t LoRaClass::print(long unsigned int, int)	24	static
-lora.cpp:785:8:size_t LoRaClass::print(double, int)	24	static
-lora.cpp:792:8:size_t LoRaClass::printNumber(long unsigned int, uint8_t)	64	static
-lora.cpp:812:8:size_t LoRaClass::printFloat(double, uint8_t)	72	static
-lora.cpp:857:15:void __static_initialization_and_destruction_0(int, int)	16	static
-lora.cpp:857:15:cpp)	8	static
+lora.cpp:697:9:uint8_t LoRaClass::readRegister(uint8_t)	24	static
+lora.cpp:710:6:void LoRaClass::writeRegister(uint8_t, uint8_t)	24	static
+lora.cpp:722:9:uint8_t LoRaClass::singleTransfer(uint8_t, uint8_t)	32	static
+lora.cpp:757:6:void LoRaClass::onDio0Rise()	16	static
+lora.cpp:765:8:size_t LoRaClass::print(const char*)	16	static
+lora.cpp:770:8:size_t LoRaClass::print(char)	16	static
+lora.cpp:775:8:size_t LoRaClass::print(unsigned char, int)	24	static
+lora.cpp:780:8:size_t LoRaClass::print(int, int)	24	static
+lora.cpp:785:8:size_t LoRaClass::print(unsigned int, int)	24	static
+lora.cpp:790:8:size_t LoRaClass::print(long int, int)	32	static
+lora.cpp:806:8:size_t LoRaClass::print(long unsigned int, int)	24	static
+lora.cpp:812:8:size_t LoRaClass::print(double, int)	24	static
+lora.cpp:819:8:size_t LoRaClass::printNumber(long unsigned int, uint8_t)	64	static
+lora.cpp:839:8:size_t LoRaClass::printFloat(double, uint8_t)	72	static
+lora.cpp:884:15:void __static_initialization_and_destruction_0(int, int)	16	static
+lora.cpp:884:15:cpp)	8	static

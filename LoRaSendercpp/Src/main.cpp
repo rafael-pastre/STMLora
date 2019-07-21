@@ -48,10 +48,9 @@ TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart2;
 
-LoRaClass lora;
-
-int counter;
 /* USER CODE BEGIN PV */
+LoRaClass lora;
+int counter;
 
 /* USER CODE END PV */
 
@@ -104,40 +103,40 @@ int main(void)
   MX_TIM1_Init();
 
   /* USER CODE BEGIN 2 */
-  	  //LoRa.setPins(LORA_CS_PIN, LORA_RST_PIN, LORA_DIO0_PIN);
-  	  LoRa.setPins(SPI2_NSS_GPIO_Port, SPI2_NSS_Pin, NULL, -1, EXTI15_10_IRQn);
-  	  LoRa.setSPI(&hspi2);
-  	  LoRa.setTIM(&htim1);
+  LoRa.setPins(SPI2_NSS_GPIO_Port, SPI2_NSS_Pin, NULL, -1, EXTI15_10_IRQn);
+  LoRa.setSPI(&hspi2);
+  LoRa.setTIM(&htim1);
 
-      if (!LoRa.begin(433.123E6)) {
-        printf("Starting LoRa failed!\n");
-        while (1);
-      }
-      LoRa.setTxPower(20, 1);
-      LoRa.setSignalBandwidth(125E3);
-      LoRa.setSpreadingFactor(11);
-      LoRa.enableCrc();
-      printf("LoRa started\n");
+  if (!LoRa.begin(433.123E6)) {
+	  printf("Starting LoRa failed!\n");
+      while (1);
+  }
+  LoRa.setTxPower(20, 1);
+  LoRa.setSignalBandwidth(125E3);
+  LoRa.setSpreadingFactor(11);
+  LoRa.enableCrc();
+  printf("LoRa started\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	printf("Sending packet: %d\n", counter);
+
+	// send packet
+	LoRa.beginPacket();
+	LoRa.print("hello ");
+	LoRa.print(counter);
+	LoRa.print("\n");
+	LoRa.print("LF working");
+	LoRa.endPacket();
+
+	counter++;
+
+	HAL_Delay(1500);
     /* USER CODE END WHILE */
-	  	printf("Sending packet: %d\n", counter);
 
-	    // send packet
-	    LoRa.beginPacket();
-	    LoRa.print("hello ");
-	    LoRa.print(counter);
-	    LoRa.print("\n");
-	    LoRa.print("LF working");
-	    LoRa.endPacket();
-
-	    counter++;
-
-	    HAL_Delay(1500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -219,7 +218,7 @@ static void MX_SPI2_Init(void)
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
