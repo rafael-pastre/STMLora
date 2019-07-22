@@ -59,5 +59,3 @@ lora.cpp:806:8:size_t LoRaClass::print(long unsigned int, int)	24	static
 lora.cpp:812:8:size_t LoRaClass::print(double, int)	24	static
 lora.cpp:819:8:size_t LoRaClass::printNumber(long unsigned int, uint8_t)	64	static
 lora.cpp:839:8:size_t LoRaClass::printFloat(double, uint8_t)	72	static
-lora.cpp:884:15:void __static_initialization_and_destruction_0(int, int)	16	static
-lora.cpp:884:15:cpp)	8	static

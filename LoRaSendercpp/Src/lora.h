@@ -145,6 +145,4 @@ public:
   void (*_onReceive)(int);
 };
 
-extern LoRaClass LoRa;
-
 #endif /* LORA_H_ */

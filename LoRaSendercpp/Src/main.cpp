@@ -103,18 +103,18 @@ int main(void)
   MX_TIM1_Init();
 
   /* USER CODE BEGIN 2 */
-  LoRa.setPins(SPI2_NSS_GPIO_Port, SPI2_NSS_Pin, NULL, -1, EXTI15_10_IRQn);
-  LoRa.setSPI(&hspi2);
-  LoRa.setTIM(&htim1);
+  lora.setPins(SPI2_NSS_GPIO_Port, SPI2_NSS_Pin, NULL, -1, EXTI15_10_IRQn);
+  lora.setSPI(&hspi2);
+  lora.setTIM(&htim1);
 
-  if (!LoRa.begin(433.123E6)) {
+  if (!lora.begin(433.123E6)) {
 	  printf("Starting LoRa failed!\n");
       while (1);
   }
-  LoRa.setTxPower(20, 1);
-  LoRa.setSignalBandwidth(125E3);
-  LoRa.setSpreadingFactor(11);
-  LoRa.enableCrc();
+  lora.setTxPower(20, 1);
+  lora.setSignalBandwidth(125E3);
+  lora.setSpreadingFactor(11);
+  lora.enableCrc();
   printf("LoRa started\n");
   /* USER CODE END 2 */
 
@@ -125,12 +125,12 @@ int main(void)
 	printf("Sending packet: %d\n", counter);
 
 	// send packet
-	LoRa.beginPacket();
-	LoRa.print("hello ");
-	LoRa.print(counter);
-	LoRa.print("\n");
-	LoRa.print("LF working");
-	LoRa.endPacket();
+	lora.beginPacket();
+	lora.print("hello ");
+	lora.print(counter);
+	lora.print("\n");
+	lora.print("LF working");
+	lora.endPacket();
 
 	counter++;
 

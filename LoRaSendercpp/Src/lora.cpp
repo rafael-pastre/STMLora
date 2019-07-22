@@ -756,7 +756,7 @@ uint8_t LoRaClass::singleTransfer(uint8_t address, uint8_t value)
 //handleDio0Rise()
 void LoRaClass::onDio0Rise()
 {
-  LoRa.handleDio0Rise();
+  handleDio0Rise();
 }
 
 /**
@@ -881,4 +881,3 @@ size_t LoRaClass::printFloat(double number, uint8_t digits)
   return n;
 }
 
-LoRaClass LoRa;
